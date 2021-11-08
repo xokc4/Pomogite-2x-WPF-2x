@@ -31,7 +31,7 @@ namespace Pomogite_2x_WPF_2x
         {
             InitializeComponent();
             //путь файла
-            string path = @"C:\Users\poc18\OneDrive\Рабочий стол\задание4\Now\Company.xml";
+            string path = @".\Company.xml";
             //создания компании
             company1 = new Company();
             //депериализация файла
