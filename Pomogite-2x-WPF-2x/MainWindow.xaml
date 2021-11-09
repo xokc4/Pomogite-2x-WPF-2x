@@ -40,6 +40,7 @@
         </ListView>
         
         <Button Content="Создать" x:Name="Csow" Click="Csow_Click"   HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="101"/>
+        <!--чтобы кнопка "refresh" работала нужно нажать на департамент и нажать кнопку--> 
         <Button Content="Refresh" x:Name="Ref" Click="Ref_Click" HorizontalAlignment="Left" Margin="133,272,0,0" VerticalAlignment="Top" Width="102"/>
         <Button Content="изменить" x:Name="change" Click="change_Click" HorizontalAlignment="Left" Margin="10,348,0,0" VerticalAlignment="Top" Width="101"/>
         <!--при выборе удаления работника студента или департамента нужно нажать два раза-->
