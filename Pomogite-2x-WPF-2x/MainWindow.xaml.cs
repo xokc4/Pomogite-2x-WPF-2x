@@ -1,6 +1,7 @@
 ﻿using Pomogite_2x_WPF_2x.StructurCompanyPg;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,19 @@ using System.Windows.Shapes;
 
 namespace Pomogite_2x_WPF_2x
 {
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        
         //индекс по нажатию таблицы
         public static int firstIndex = 0;
-        public Company company1;
+
+        //создания компании
+        public static  Company company;
         /// <summary>
         /// запускаеться программа и берет компанию с файла 
         /// </summary>
@@ -31,11 +37,10 @@ namespace Pomogite_2x_WPF_2x
         {
             InitializeComponent();
             //путь файла
-            string path = @".\Company.xml";
-            //создания компании
-            company1 = new Company();
+            string path = @"C:\Users\poc18\OneDrive\Рабочий стол\задание4\Now\Company.xml";
+            company = new Company();
             //депериализация файла
-            company1 = company1.DeserializeXml(path);
+            company = Company.DeserializeXml(path);
         }
         /// <summary>
         /// кнопка для создани компании
@@ -56,20 +61,20 @@ namespace Pomogite_2x_WPF_2x
         private void Ref_Click(object sender, RoutedEventArgs e)
         {
             //заполняет лист коллекцией работников по айди департамента 
-            lvWork.ItemsSource = company1.Workers.Where(idWork);
+            lvWork.ItemsSource =  company.Workers.Where(idWork);
             //заполняет лист коллекцией студентов по айди департамента 
-            lvStud.ItemsSource = company1.Students.Where(idStud);
+            lvStud.ItemsSource = company.Students.Where(idStud);
         }
         /// <summary>
         /// метод по выдачи департаментот работников и студентов в таблицы 
         /// </summary>
         private void refresh()
         {   //заполняет лист коллекцией работников
-            lvWork.ItemsSource = company1.Workers;
+            lvWork.ItemsSource = company.Workers;
             //заполняет лист коллекцией студентов 
-            lvStud.ItemsSource = company1.Students;
+            lvStud.ItemsSource = company.Students;
             //заполняет лист коллекцией департаментов
-            lvDepart.ItemsSource = company1.Departaments;
+            lvDepart.ItemsSource = company.Departaments;
         }
 
         private void change_Click(object sender, RoutedEventArgs e)
@@ -86,19 +91,30 @@ namespace Pomogite_2x_WPF_2x
             if (firstIndex == 2)
             {
                 int indexWork = lvWork.SelectedIndex;//индекс по удалению работника
-                company1.Workers.RemoveAt(indexWork);//удаление работника в коллекции
+                company.Workers.RemoveAt(indexWork);//удаление работника в коллекции
             }
             if (firstIndex == 3)
             {
                 int indexStud = lvStud.SelectedIndex;//индекс по удалению студента
-                company1.Students.RemoveAt(indexStud);//удаление студента в коллекции
+                company.Students.RemoveAt(indexStud);//удаление студента в коллекции
             }
             if (firstIndex ==1)
             {
                 int indexDep = lvDepart.SelectedIndex;//индекс по удалению департамента
-                company1.Departaments.RemoveAt(indexDep);//удаление департамента в коллекции
+                int IDdelet = Convert.ToInt32(ID.Text);// удаление по ауди сотрудников
+                company.Departaments.RemoveAt(indexDep);//удаление департамента в коллекции
+                DeletStaff(IDdelet);
             }
             refresh();
+        }
+        /// <summary>
+        /// удаление сотрудников после департамента 
+        /// </summary>
+        /// <param name="IDdelet"></param>
+        public void DeletStaff(int IDdelet)
+        {
+            company.Workers.RemoveAll(item => item.IdDepart == IDdelet);
+            company.Students.RemoveAll(item => item.IdDepart == IDdelet);
         }
         /// <summary>
         /// кнопка по открытие новой формы
@@ -230,6 +246,25 @@ namespace Pomogite_2x_WPF_2x
             NameDep.Visibility = Visibility.Hidden;
             Quantity.Visibility = Visibility.Hidden;
             ID.Visibility = Visibility.Hidden;
+        }
+        /// <summary>
+        /// кнопка обновления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshNow_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteListView();
+            refresh();
+        }
+        /// <summary>
+        /// происходит удаление текста в таблице 
+        /// </summary>
+        public void DeleteListView()
+        {
+            lvDepart.ItemsSource = null;
+            lvStud.ItemsSource = null;
+            lvWork.ItemsSource = null;
         }
     }
 }

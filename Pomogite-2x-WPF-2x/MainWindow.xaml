@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!--после каких нибудь изменений нужно нажать обновить-->
         <ListView x:Name="lvDepart" Margin="10,0,573,165" GotFocus="lvDepart_GotFocus">
             <ListView.View>
                 <GridView>
@@ -41,7 +42,7 @@
         
         <Button Content="Создать" x:Name="Csow" Click="Csow_Click"   HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="101"/>
         <!--чтобы кнопка "refresh" работала нужно нажать на департамент и нажать кнопку--> 
-        <Button Content="Refresh" x:Name="Ref" Click="Ref_Click" HorizontalAlignment="Left" Margin="133,272,0,0" VerticalAlignment="Top" Width="102"/>
+        <Button Content="Выбрать сотрудников из департамента" x:Name="Ref" Click="Ref_Click" HorizontalAlignment="Left" Margin="116,272,0,0" VerticalAlignment="Top" Width="230"/>
         <Button Content="изменить" x:Name="change" Click="change_Click" HorizontalAlignment="Left" Margin="10,348,0,0" VerticalAlignment="Top" Width="101"/>
         <!--при выборе удаления работника студента или департамента нужно нажать два раза-->
         <Button Content="удалить"  x:Name="Delete" Click="Delete_Click" HorizontalAlignment="Left" Margin="707,272,0,0" VerticalAlignment="Top" Width="75"/>
@@ -61,5 +62,6 @@
         <TextBox HorizontalAlignment="Left" x:Name="NameDep" Height="20" Margin="133,348,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lvDepart,  Path=SelectedItem.NameDepartament}"  VerticalAlignment="Top" Width="92"/>
         <TextBox HorizontalAlignment="Left" x:Name="Quantity" Height="20" Margin="230,348,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lvDepart,  Path=SelectedItem.Quantity}"  VerticalAlignment="Top" Width="80"/>
         <TextBox HorizontalAlignment="Left" x:Name="ID" Height="20" Margin="315,348,0,0" TextWrapping="Wrap" Text="{Binding ElementName=lvDepart,  Path=SelectedItem.ID }"  VerticalAlignment="Top" Width="80"/>
+        <Button Content="обновить" x:Name="RefreshNow" Click="RefreshNow_Click" HorizontalAlignment="Left" Margin="351,272,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

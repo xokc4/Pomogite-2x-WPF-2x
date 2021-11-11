@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pomogite_2x_WPF_2x.StructurCompanyPg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,6 @@ namespace Pomogite_2x_WPF_2x
     /// </summary>
     public partial class AddDep : Window
     {
-        public MainWindow mainWindow = new MainWindow();
-        
         public AddDep()
         {
            
@@ -33,7 +32,8 @@ namespace Pomogite_2x_WPF_2x
         /// <param name="e"></param>
         private void AddWork_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.company1.Workers.Add(new People.Worker(Convert.ToString(NameWork), Convert.ToString(LastNameWork), Convert.ToInt32(AgeWork.Text), Convert.ToInt32(Salary.Text), Convert.ToInt32(ID.Text)));
+           
+           MainWindow.company.Workers.Add(new People.Worker(Convert.ToString(NameWork.Text), Convert.ToString(LastNameWork.Text), Convert.ToInt32(AgeWork.Text), Convert.ToInt32(Salary.Text), Convert.ToInt32(ID.Text)));
         }
         /// <summary>
         /// добавление студента в коллекцию
@@ -42,7 +42,7 @@ namespace Pomogite_2x_WPF_2x
         /// <param name="e"></param>
         private void AddStud_Click(object sender, RoutedEventArgs e)
         {
-           mainWindow.company1.Students.Add(new People.Student(Convert.ToString(NameStud), Convert.ToString(LastNameStud), Convert.ToInt32(AgeStud.Text), Convert.ToInt32(300), Convert.ToInt32(IDStud.Text)));
+           MainWindow.company.Students.Add(new People.Student(Convert.ToString(NameStud.Text), Convert.ToString(LastNameStud.Text), Convert.ToInt32(AgeStud.Text), Convert.ToInt32(300), Convert.ToInt32(IDStud.Text)));
         }
         /// <summary>
         /// добавление департамента в коллекцию
@@ -51,7 +51,7 @@ namespace Pomogite_2x_WPF_2x
         /// <param name="e"></param>
         private void AddDepart_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.company1.Departaments.Add(new StructurCompanyPg.Departament(Convert.ToString(NameDep), Convert.ToInt32(QuantityWork.Text), Convert.ToInt32(IDDep.Text)));
+           MainWindow.company.Departaments.Add(new Departament(Convert.ToString(NameDep.Text), Convert.ToInt32(QuantityWork.Text), Convert.ToInt32(IDDep.Text)));
         }
     }
 }

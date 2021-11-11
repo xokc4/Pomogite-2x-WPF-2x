@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pomogite_2x_WPF_2x.StructurCompanyPg
 {
-   public  class Departament
+   public class Departament
     {
         //имя департамента
         public string NameDepartament { get; set; }
