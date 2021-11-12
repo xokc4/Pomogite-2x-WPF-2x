@@ -10,6 +10,7 @@ namespace Pomogite_2x_WPF_2x.StructurCompanyPg
 {
   public  class Company
   {
+       
         // названия кмпании
         public  string NameCompany { get; set; }
         //коллекция департаментов

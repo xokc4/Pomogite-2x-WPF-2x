@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Pomogite_2x_WPF_2x
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyChanged
     {
         
         
@@ -30,6 +31,7 @@ namespace Pomogite_2x_WPF_2x
 
         //создания компании
         public static  Company company;
+        public static MainWindow mainWindow;
         /// <summary>
         /// запускаеться программа и берет компанию с файла 
         /// </summary>
@@ -40,7 +42,7 @@ namespace Pomogite_2x_WPF_2x
             string path = @".\Company.xml";
             company = new Company();
             //депериализация файла
-            company = Company.DeserializeXml(path);
+            ExistencePath(path);
         }
         /// <summary>
         /// кнопка для создани компании
@@ -92,11 +94,13 @@ namespace Pomogite_2x_WPF_2x
             {
                 int indexWork = lvWork.SelectedIndex;//индекс по удалению работника
                 company.Workers.RemoveAt(indexWork);//удаление работника в коллекции
+                Changed();
             }
             if (firstIndex == 3)
             {
                 int indexStud = lvStud.SelectedIndex;//индекс по удалению студента
                 company.Students.RemoveAt(indexStud);//удаление студента в коллекции
+                Changed();
             }
             if (firstIndex ==1)
             {
@@ -104,6 +108,7 @@ namespace Pomogite_2x_WPF_2x
                 int IDdelet = Convert.ToInt32(ID.Text);// удаление по ауди сотрудников
                 company.Departaments.RemoveAt(indexDep);//удаление департамента в коллекции
                 DeletStaff(IDdelet);
+                Changed();
             }
             refresh();
         }
@@ -254,9 +259,9 @@ namespace Pomogite_2x_WPF_2x
         /// <param name="e"></param>
         private void RefreshNow_Click(object sender, RoutedEventArgs e)
         {
-            DeleteListView();
-            refresh();
+            Changed();
         }
+        
         /// <summary>
         /// происходит удаление текста в таблице 
         /// </summary>
@@ -265,6 +270,28 @@ namespace Pomogite_2x_WPF_2x
             lvDepart.ItemsSource = null;
             lvStud.ItemsSource = null;
             lvWork.ItemsSource = null;
+        }
+        /// <summary>
+        /// метод проверяет, существует ли файл
+        /// </summary>
+        /// <param name="path"></param>
+        public void ExistencePath(string path)
+        {
+            if (!(File.Exists(path)))
+            {
+                MessageBox.Show("Файла не существует");
+                Close();
+            }
+            else
+            {
+                company = Company.DeserializeXml(path);
+            }
+        }
+
+        public void Changed()
+        {
+            DeleteListView();
+            refresh();
         }
     }
 }

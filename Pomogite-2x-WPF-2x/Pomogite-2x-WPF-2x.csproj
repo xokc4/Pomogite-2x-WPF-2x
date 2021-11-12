@@ -58,6 +58,7 @@
     <Compile Include="AddDep.xaml.cs">
       <DependentUpon>AddDep.xaml</DependentUpon>
     </Compile>
+    <Compile Include="INotifyChanged.cs" />
     <Compile Include="StructurCompanyPg\Company.cs" />
     <Compile Include="StructurCompanyPg\Departament.cs" />
     <Page Include="AddDep.xaml">
